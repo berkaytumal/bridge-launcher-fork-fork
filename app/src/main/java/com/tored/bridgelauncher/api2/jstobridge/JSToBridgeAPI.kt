@@ -20,7 +20,9 @@ import androidx.datastore.preferences.core.MutablePreferences
 import androidx.datastore.preferences.core.edit
 import com.tored.bridgelauncher.BridgeLauncherApplication
 import com.tored.bridgelauncher.api2.server.BridgeServer
+import com.tored.bridgelauncher.api2.server.AdaptiveIconLayersEndpointRef
 import com.tored.bridgelauncher.api2.server.endpoints.AppIconsEndpoint
+import com.tored.bridgelauncher.api2.server.endpoints.AdaptiveIconLayersEndpoint
 import com.tored.bridgelauncher.api2.server.endpoints.IconPackContentEndpoint
 import com.tored.bridgelauncher.api2.server.endpoints.IconPacksEndpoint
 import com.tored.bridgelauncher.api2.server.getBridgeApiEndpointURL
@@ -208,6 +210,14 @@ class JSToBridgeAPI(
             AppIconsEndpoint.QUERY_ICON_PACK_PACKAGE_NAME to iconPackPackageName,
             AppIconsEndpoint.QUERY_NOT_FOUND_BEHAVIOR to AppIconsEndpoint.IconNotFoundBehaviors.Default,
         )
+    @JavascriptInterface
+    fun getAppIconLayer(appPackageName: String, iconPackPackageName: String? = null): String {
+        return getBridgeApiEndpointURL(
+            AdaptiveIconLayersEndpointRef.ENDPOINT_ADAPTIVE_ICON_LAYERS,
+            AdaptiveIconLayersEndpoint.QUERY_PACKAGE_NAME to appPackageName,
+            AdaptiveIconLayersEndpoint.QUERY_ICON_PACK_PACKAGE_NAME to iconPackPackageName
+        )
+    }
 
     @JavascriptInterface
     fun getIconPackAppIconURL(iconPackPackageName: String, appPackageName: String) =

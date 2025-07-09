@@ -4,6 +4,7 @@ import android.util.Log
 import android.webkit.WebResourceRequest
 import android.webkit.WebResourceResponse
 import com.tored.bridgelauncher.BridgeLauncherApplication
+import com.tored.bridgelauncher.api2.server.endpoints.AdaptiveIconLayersEndpoint
 import com.tored.bridgelauncher.api2.server.endpoints.AppIconsEndpoint
 import com.tored.bridgelauncher.api2.server.endpoints.AppsEndpoint
 import com.tored.bridgelauncher.api2.server.endpoints.BridgeFileServer
@@ -62,6 +63,7 @@ class BridgeServer(
         ENDPOINT_APP_ICONS to AppIconsEndpoint(_apps, _iconPacks),
         ENDPOINT_ICON_PACKS to IconPacksEndpoint(_iconPacks),
         ENDPOINT_ICON_PACK_CONTENT to IconPackContentEndpoint(_iconPacks),
+        AdaptiveIconLayersEndpointRef.ENDPOINT_ADAPTIVE_ICON_LAYERS to AdaptiveIconLayersEndpoint(_apps),
     )
 
     suspend fun handle(req: WebResourceRequest): WebResourceResponse?
@@ -112,5 +114,6 @@ class BridgeServer(
         const val ENDPOINT_APPS = "apps"
         const val ENDPOINT_APP_ICONS = "appicons"
         const val ENDPOINT_ICON_PACKS = "iconpacks"
+        const val ENDPOINT_ADAPTIVE_ICON_LAYERS = "adaptiveiconlayers"
     }
 }
